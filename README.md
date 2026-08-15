@@ -56,7 +56,7 @@ Integrated the **OpenAI API** to provide an intelligent, context-aware chatbot o
 ## 🚀 Live Demo & Deployment
 
 The application is fully containerized and automatically deployed via a CI/CD pipeline. 
-**Live Application**: *(Replace with Render Link)*
+**Live Application**: [https://optidata.onrender.com/](https://optidata.onrender.com/)
 
 ### How to test the Background Automation instantly:
 1. Open the UI and select a duration of **1 Hour**.
