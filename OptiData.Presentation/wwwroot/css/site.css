@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
 
 :root {
-  /* Classy, Lively Feminine Light Mode (Warm Ivory, Peach, Champagne) */
-  --bg-main: #fdfbf9;       /* Extremely soft, warm ivory background */
+  /* Beautiful, Very Vibrant Feminine Palette */
+  --bg-main: #fff0f5;       /* Soft Lavender Blush / Light Pink */
   --bg-card: #ffffff;       /* Pure white cards */
-  --text-main: #3d3636;     /* Deep Espresso text (softer than black) */
-  --text-muted: #8c8282;    /* Warm taupe gray */
-  --primary-accent: #ff8e72; /* Lively vibrant Peach/Coral (elegant, feminine) */
-  --secondary-accent: #eeba4c; /* Lively Sunlight/Champagne Gold */
+  --text-main: #4a2842;     /* Deep Eggplant / Dark purple text */
+  --text-muted: #9e7f96;    /* Muted warm purple */
+  --primary-accent: #ff2a75; /* Extremely Vibrant Fuchsia / Hot Pink */
+  --secondary-accent: #fbc2eb; /* Soft Lilac / Pink Accent */
   --success-color: #10b981;  /* Classic Emerald Green */
-  --glass-border: rgba(0, 0, 0, 0.06); /* Clean dark line, absolutely zero glow */
+  --glass-border: rgba(255, 42, 117, 0.15); /* Pink tinted glass border */
   --glass-bg: rgba(255, 255, 255, 0.95); 
-  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Extremely subtle, flat shadow, zero glow */
+  --glass-shadow: 0 4px 25px rgba(255, 42, 117, 0.12); /* Vibrant pink tinted shadow */
 }
 
 html, body {

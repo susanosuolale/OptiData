@@ -17,18 +17,19 @@
         </div>
     </div>
 
-    <!-- Main Application Area (Form & AI) -->
-    <div class="row g-5 mb-5">
-        <!-- Main Optimization Form (Half Width) -->
-        <div class="col-md-6">
-            <div class="glass-container h-100 p-4">
-                <h3 style="color: var(--primary-accent); font-size: 22px; margin-bottom: 25px;">Start Optimizing</h3>
+    </div>
+
+    <!-- Main Optimization Form (Centered) -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8">
+            <div class="glass-container p-5 text-center">
+                <h3 style="color: var(--primary-accent); font-size: 26px; margin-bottom: 30px;">Start Optimizing</h3>
                 <form id="optimizeForm">
-                    <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
-                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 8px;">How long do you need data for?</label>
+                    <div class="input-group" style="margin-bottom: 25px; text-align: left; display: block;">
+                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 10px;">How long do you need data for?</label>
                         <div class="d-flex gap-2">
-                            <input type="number" id="durationInput" name="duration" value="1" min="1" required class="form-control w-50" />
-                            <select id="timeUnitInput" name="timeUnit" class="form-select w-50" required>
+                            <input type="number" id="durationInput" name="duration" value="1" min="1" required class="form-control w-50" style="padding: 12px;" />
+                            <select id="timeUnitInput" name="timeUnit" class="form-select w-50" required style="padding: 12px;">
                                 <option value="Hours">Hours</option>
                                 <option value="Days" selected>Days</option>
                                 <option value="Months">Months</option>
@@ -36,31 +37,32 @@
                             </select>
                         </div>
                     </div>
-                    <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
-                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 8px;">Select Telecom Provider</label>
-                        <select id="providerInput" name="provider" class="form-select" required>
+                    <div class="input-group" style="margin-bottom: 30px; text-align: left; display: block;">
+                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 10px;">Select Telecom Provider</label>
+                        <select id="providerInput" name="provider" class="form-select" required style="padding: 12px;">
                             <option value="" disabled selected>Select Provider</option>
                             <option value="MTN">MTN</option>
                             <option value="Airtel">Airtel</option>
                             <option value="GLO">GLO</option>
                             <option value="NineMobile">9Mobile</option>
                         </select>
-                        <div id="selectedProviderDisplay" style="margin-top: 15px; display: none; padding: 12px 18px; border-radius: 12px; background: rgba(238, 186, 76, 0.15); border: 1px solid var(--secondary-accent); font-weight: 600; color: var(--text-main); align-items: center; gap: 10px; transition: all 0.3s ease;">
+                        <div id="selectedProviderDisplay" style="margin-top: 15px; display: none; padding: 12px 18px; border-radius: 12px; background: rgba(255, 42, 117, 0.05); border: 1px solid var(--secondary-accent); font-weight: 600; color: var(--text-main); align-items: center; gap: 10px; transition: all 0.3s ease;">
                             <span style="font-size: 20px;">📡</span> Network Selected: <strong id="providerText" style="color: var(--primary-accent); font-size: 16px;"></strong>
                         </div>
                     </div>
 
-                    <button type="submit" id="optimizeBtn" class="btn-primary w-100 mt-3">Optimize My Bundle</button>
+                    <button type="submit" id="optimizeBtn" class="btn-primary w-100 mt-3" style="font-size: 18px; padding: 15px;">Optimize My Bundle</button>
                 </form>
 
                 <div id="ajaxMessages" class="mt-3"></div>
                 <div id="ajaxResult" class="mt-4"></div>
             </div>
         </div>
+    </div>
 
-        <!-- AI Assistant Widget (Half Width) -->
-        <div class="col-md-6">
-            <div class="glass-container h-100 p-4" style="text-align: left; display: flex; flex-direction: column;">
+    <!-- AI Assistant Floating Widget -->
+    <div style="position: fixed; bottom: 30px; right: 30px; width: 380px; z-index: 1000; filter: drop-shadow(0 15px 30px rgba(255, 42, 117, 0.2));">
+        <div class="glass-container h-100 p-4" style="text-align: left; display: flex; flex-direction: column; background: var(--bg-card); box-shadow: 0 4px 30px rgba(255, 42, 117, 0.15);">
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
                     <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent)); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
                         AI
@@ -99,7 +101,7 @@
         <div class="col-md-5 pe-md-5">
             <h3 style="color: var(--primary-accent); font-size: 32px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px;">Your data, fully interactive</h3>
             <p style="color: var(--text-main); font-size: 18px; line-height: 1.7; opacity: 0.9;">
-                Transform raw data into interactive visualizations that are as sleek as they are engaging. Say goodbye to static charts and let your audience explore, connect, and truly understand your story using our real-time historical data footprint.
+                Visualizing your data shouldn't be a black box. This interactive chart visually plots the simulated historical footprint actively generated by our Background Workers, providing the exact dataset our Machine Learning algorithm uses to train itself.
             </p>
         </div>
         <div class="col-md-7">
@@ -119,7 +121,7 @@
         <div class="col-md-6 order-1 order-md-2 ps-md-5">
             <h3 style="color: var(--primary-accent); font-size: 32px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px;">Hyper-Personalized Machine Learning</h3>
             <p style="color: var(--text-main); font-size: 18px; line-height: 1.7; opacity: 0.9;">
-                Estimating a generic "average" for data consumption leads to wasted money. Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve, it guarantees mathematical precision tailored solely to your unique digital lifestyle.
+                Estimating a generic "average" for data consumption is inherently flawed. Underestimating leads to unexpected, frustrating disconnections, while overestimating results in expired data and wasted money. Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint, guaranteeing mathematical precision tailored solely to your unique digital lifestyle.
             </p>
         </div>
     </div>
