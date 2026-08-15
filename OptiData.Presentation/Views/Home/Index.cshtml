@@ -4,33 +4,14 @@
 @model OptiData.Presentation.Models.OptimizationResultViewModel
 
 <div class="container mt-5">
-    <!-- Top Level Feature Callout -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div style="background: linear-gradient(135deg, rgba(238, 186, 76, 0.15) 0%, rgba(255, 140, 105, 0.1) 100%); padding: 20px; border-radius: 12px; border-left: 5px solid var(--secondary-accent); display: flex; align-items: center; gap: 20px;">
-                <div style="font-size: 32px;">🧠</div>
-                <div style="text-align: left;">
-                    <h4 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 5px; font-size: 18px;">Hyper-Personalized Machine Learning</h4>
-                    <p style="color: var(--text-main); margin: 0; font-size: 15px; line-height: 1.5;">
-                        Most applications blindly recommend plans based on "average" consumer trends. <strong>OptiData is fundamentally different.</strong> Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve instead of guessing averages, it guarantees mathematical precision tailored solely to you.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row g-4 mb-4">
+    <!-- Hero / Main Application Area -->
+    <div class="row g-4 mb-5">
         <!-- Main Optimization Form (Half Width) -->
         <div class="col-md-6">
             <div class="glass-container">
                 <h1>OptiData</h1>
                 <p class="subtitle" style="color: var(--text-muted); margin-bottom: 30px;">Never guess your data usage again.</p>
-                <div style="background: #fff8f5; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary-accent); text-align: left;">
-                    <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 8px; font-size: 18px;">Intelligent Bundle Optimization</h3>
-                    <p style="color: var(--text-main); margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
-                        Have you ever bought a 3GB data plan for the weekend, only to run out on Saturday night? Or bought a 30GB plan for the month, and watched 4GB expire because you didn't use it? We all experience this frustrating guessing game. OptiData uses Machine Learning to learn your exact usage habits, predicts precisely how much data you actually need, and recommends the absolute cheapest bundle. No more wasted money on expired data, and no more getting unexpectedly disconnected!
-                    </p>
-                </div>
+
 
 
                 <form id="optimizeForm">
@@ -101,6 +82,34 @@
         </div>
     </div>
 
+
+    <!-- Features / Why OptiData Section -->
+    <div class="row mb-5 text-center">
+        <div class="col-12 mb-4">
+            <h2 style="color: var(--primary-accent); font-weight: 700; font-size: 28px;">Why Use OptiData?</h2>
+            <p style="color: var(--text-muted); font-size: 16px;">The definitive solution to the Data Guessing Game.</p>
+        </div>
+        
+        <div class="col-md-6 mb-4">
+            <div class="glass-container h-100" style="padding: 2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); transition: transform 0.3s ease;">
+                <div style="font-size: 40px; margin-bottom: 15px;">🧠</div>
+                <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 15px; font-size: 20px;">Hyper-Personalized Machine Learning</h3>
+                <p style="color: var(--text-main); margin: 0; font-size: 15px; line-height: 1.6;">
+                    Estimating a generic "average" for data consumption leads to wasted money. Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve, it guarantees mathematical precision tailored solely to your unique digital lifestyle.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="glass-container h-100" style="padding: 2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); transition: transform 0.3s ease;">
+                <div style="font-size: 40px; margin-bottom: 15px;">💸</div>
+                <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 15px; font-size: 20px;">Intelligent Bundle Optimization</h3>
+                <p style="color: var(--text-main); margin: 0; font-size: 15px; line-height: 1.6;">
+                    Have you ever bought a 3GB data plan for the weekend, only to run out on Saturday night? Or bought a 30GB plan for the month, and watched 4GB expire? We all experience this frustrating guessing game. OptiData predicts precisely how much data you actually need and recommends the absolute cheapest mathematical combination of bundles.
+                </p>
+            </div>
+        </div>
+    </div>
 
     <!-- Full-width Chart Row -->
     <div class="row mb-4">
