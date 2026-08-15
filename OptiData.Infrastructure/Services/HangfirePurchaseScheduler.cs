@@ -10,12 +10,20 @@ namespace OptiData.Infrastructure.Services
     {
         public void SchedulePurchase(Guid userId, decimal predictedMB, DataProvider provider, int hoursToWait)
         {
-            BackgroundJob.Schedule<BundlePurchaseJob>(
-                // what job to execute
-                job => job.ExecutePurchaseSimulationAsync(userId, predictedMB, provider),
-                // tells background job when to start executing
-                TimeSpan.FromHours(hoursToWait)
-            );
+            if (hoursToWait <= 0)
+            {
+                // Enqueue instantly bypasses Hangfire's 15-second schedule poller delay
+                BackgroundJob.Enqueue<BundlePurchaseJob>(
+                    job => job.ExecutePurchaseSimulationAsync(userId, predictedMB, provider)
+                );
+            }
+            else
+            {
+                BackgroundJob.Schedule<BundlePurchaseJob>(
+                    job => job.ExecutePurchaseSimulationAsync(userId, predictedMB, provider),
+                    TimeSpan.FromHours(hoursToWait)
+                );
+            }
         }
     }
 }

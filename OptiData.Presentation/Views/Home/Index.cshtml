@@ -240,7 +240,15 @@
                                 });
                                 const schedData = await schedRes.json();
                                 if (schedData.success) {
-                                    ajaxMessages.innerHTML = `<div class="alert alert-success" style="border-radius: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981;">${schedData.message}</div>`;
+                                    // Senior Best Practice: The backend provides raw UTC data, and the frontend 
+                                    // dynamically converts it to whatever timezone the user happens to be in!
+                                    const localTime = new Date(schedData.purchaseTimeUtc).toLocaleString(undefined, {
+                                        weekday: 'long', year: 'numeric', month: 'long', 
+                                        day: 'numeric', hour: '2-digit', minute: '2-digit'
+                                    });
+                                    
+                                    const message = `Auto-Purchase Successfully Scheduled! We will buy it seamlessly in the background on <strong>${localTime}</strong>, exactly before your current data expires.`;
+                                    ajaxMessages.innerHTML = `<div class="alert alert-success" style="border-radius: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981;">${message}</div>`;
                                 }
                                 this.innerText = 'Auto-Purchase Enabled';
                             });

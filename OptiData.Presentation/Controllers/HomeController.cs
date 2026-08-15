@@ -148,9 +148,12 @@ public class HomeController : Controller
         await _mediator.Send(command);
 
         var hoursToWait = hoursAhead > 1 ? hoursAhead - 1 : 0;
-        var exactPurchaseTime = DateTime.Now.AddHours(hoursToWait).ToString("f");
+        var exactPurchaseTimeUtc = DateTime.UtcNow.AddHours(hoursToWait);
 
-        return Json(new { success = true, message = $"Auto-Purchase Successfully Scheduled! We will buy it seamlessly in the background on <strong>{exactPurchaseTime}</strong>, exactly before your current data expires." });
+        return Json(new { 
+            success = true, 
+            purchaseTimeUtc = exactPurchaseTimeUtc 
+        });
     }
     public class OptimizeRequestModel { public int Duration {get;set;} public string TimeUnit {get;set;} public string Provider {get;set;} }
     public class ScheduleRequestModel { public decimal PredictedMB {get;set;} public string Provider {get;set;} public int Duration {get;set;} public string TimeUnit {get;set;} }
