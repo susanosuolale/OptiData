@@ -147,12 +147,10 @@ public class HomeController : Controller
 
         await _mediator.Send(command);
 
-        // For PORTFOLIO DEMONSTRATION purposes, we will override the actual hoursToWait
-        // and schedule the job to run exactly 10 seconds from now, so recruiters can see the SignalR Toast immediately.
-        var secondsToWait = 10; 
-        var exactPurchaseTime = DateTime.Now.AddSeconds(secondsToWait).ToString("T");
-        
-        return Json(new { success = true, message = $"Auto-Purchase Successfully Scheduled! For demonstration purposes, it will run in exactly 10 seconds (at <strong>{exactPurchaseTime}</strong>)." });
+        var hoursToWait = hoursAhead > 1 ? hoursAhead - 1 : 0;
+        var exactPurchaseTime = DateTime.Now.AddHours(hoursToWait).ToString("f");
+
+        return Json(new { success = true, message = $"Auto-Purchase Successfully Scheduled! We will buy it seamlessly in the background on <strong>{exactPurchaseTime}</strong>, exactly before your current data expires." });
     }
     public class OptimizeRequestModel { public int Duration {get;set;} public string TimeUnit {get;set;} public string Provider {get;set;} }
     public class ScheduleRequestModel { public decimal PredictedMB {get;set;} public string Provider {get;set;} public int Duration {get;set;} public string TimeUnit {get;set;} }

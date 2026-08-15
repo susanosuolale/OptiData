@@ -30,6 +30,15 @@ namespace OptiData.Infrastructure.Services
 
         public async Task<bool> ProcessPaymentAsync(decimal amount)
         {
+            var secretKey = _configuration["Paystack:SecretKey"];
+            if (string.IsNullOrEmpty(secretKey) || secretKey == "YOUR_PAYSTACK_SECRET_KEY_HERE")
+            {
+                // For Portfolio Demonstration: API keys are scrubbed from GitHub, so we bypass the actual API call 
+                // to prevent 401 Unauthorized errors from breaking the SignalR Toast demonstration.
+                Console.WriteLine("[Paystack Mock] Portfolio demonstration detected (API Key missing). Returning success automatically.");
+                return true;
+            }
+
             try
             {
                 // Paystack expects the amount in kobo (base currency unit), so we multiply by 100
