@@ -15,9 +15,18 @@ using OptiData.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Helper to parse Render's postgres:// URL into standard ADO.NET format
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (!string.IsNullOrEmpty(connectionString) && connectionString.StartsWith("postgres://"))
+{
+    var uri = new Uri(connectionString);
+    var userInfo = uri.UserInfo.Split(':');
+    connectionString = $"Host={uri.Host};Port={uri.Port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};Ssl Mode=Require;Trust Server Certificate=true;";
+}
+
 // Add production SQL database connection (PostgreSQL for Render deployment)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 // Register Application and Infrastructure Services
 builder.Services.AddScoped<IBundleOptimizationService, BundleOptimizationService>();
@@ -40,7 +49,7 @@ builder.Services.AddScoped<ITelecomProviderService, NineMobileTelecomProvider>()
 builder.Services.AddHangfire(configuration => configuration
     .UseSimpleAssemblyNameTypeSerializer()
     .UseRecommendedSerializerSettings()
-    .UsePostgreSqlStorage(c => c.UseNpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))));
+    .UsePostgreSqlStorage(c => c.UseNpgsqlConnection(connectionString)));
 builder.Services.AddHangfireServer();
 
 // Add services to the container.
