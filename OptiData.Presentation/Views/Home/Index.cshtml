@@ -4,20 +4,25 @@
 @model OptiData.Presentation.Models.OptimizationResultViewModel
 
 <div class="container mt-5">
-    <!-- Hero / Main Application Area -->
-    <div class="row g-4 mb-5">
+    <!-- Huge Centered Hero Section (Flourish Style) -->
+    <div class="text-center py-5 mb-5">
+        <h1 class="display-2 fw-bold" style="color: var(--primary-accent); letter-spacing: -1px; margin-bottom: 20px;">OptiData</h1>
+        <h2 class="display-6 mb-4" style="color: var(--text-muted); font-weight: 500;">Never guess your data usage again.</h2>
+        
+        <div class="mx-auto mt-5" style="max-width: 900px;">
+            <h3 style="color: var(--primary-accent); font-size: 28px; font-weight: bold; margin-bottom: 15px;">Intelligent Bundle Optimization</h3>
+            <p style="color: var(--text-main); font-size: 18px; line-height: 1.8; opacity: 0.9;">
+                Have you ever bought a 3GB data plan for the weekend, only to run out on Saturday night? Or bought a 30GB plan for the month, and watched 4GB expire? We all experience this frustrating guessing game. OptiData predicts precisely how much data you actually need and recommends the absolute cheapest mathematical combination of bundles.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Application Area (Form & AI) -->
+    <div class="row g-5 mb-5">
         <!-- Main Optimization Form (Half Width) -->
         <div class="col-md-6">
-            <div class="glass-container">
-                <h1>OptiData</h1>
-                <p class="subtitle" style="color: var(--text-muted); margin-bottom: 20px;">Never guess your data usage again.</p>
-                <div style="background: #fff8f5; padding: 15px; border-radius: 12px; margin-bottom: 20px; border-left: 4px solid var(--primary-accent); text-align: left;">
-                    <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 8px; font-size: 18px;">Intelligent Bundle Optimization</h3>
-                    <p style="color: var(--text-main); margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
-                        Have you ever bought a 3GB data plan for the weekend, only to run out on Saturday night? Or bought a 30GB plan for the month, and watched 4GB expire? We all experience this frustrating guessing game. OptiData predicts precisely how much data you actually need and recommends the absolute cheapest mathematical combination of bundles.
-                    </p>
-                </div>
-
+            <div class="glass-container h-100 p-4">
+                <h3 style="color: var(--primary-accent); font-size: 22px; margin-bottom: 25px;">Start Optimizing</h3>
                 <form id="optimizeForm">
                     <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
                         <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 8px;">How long do you need data for?</label>
@@ -55,7 +60,7 @@
 
         <!-- AI Assistant Widget (Half Width) -->
         <div class="col-md-6">
-            <div class="glass-container" style="text-align: left; position: sticky; top: 20px;">
+            <div class="glass-container h-100 p-4" style="text-align: left; display: flex; flex-direction: column;">
                 <div style="display: flex; align-items: center; margin-bottom: 20px;">
                     <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent)); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
                         AI
@@ -86,34 +91,42 @@
         </div>
     </div>
 
+    <!-- Flourish-Style Alternating Feature Sections -->
+    <hr style="border-top: 1px solid var(--glass-border); margin: 60px 0;">
 
-    <!-- Features / Why OptiData Section -->
-    <div class="row mb-5 text-center">
-        <div class="col-12 mb-4">
-            <h2 style="color: var(--primary-accent); font-weight: 700; font-size: 28px;">Why Use OptiData?</h2>
-            <p style="color: var(--text-muted); font-size: 16px;">The definitive solution to the Data Guessing Game.</p>
+    <!-- Feature 1: The Chart -->
+    <div class="row align-items-center mb-5 py-5">
+        <div class="col-md-5 pe-md-5">
+            <h3 style="color: var(--primary-accent); font-size: 32px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px;">Your data, fully interactive</h3>
+            <p style="color: var(--text-main); font-size: 18px; line-height: 1.7; opacity: 0.9;">
+                Transform raw data into interactive visualizations that are as sleek as they are engaging. Say goodbye to static charts and let your audience explore, connect, and truly understand your story using our real-time historical data footprint.
+            </p>
         </div>
-        
-        <div class="col-md-6 mb-4">
-            <div class="glass-container h-100" style="padding: 2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); text-align: left; transition: transform 0.3s ease;">
-                <div style="font-size: 40px; margin-bottom: 15px;">🧠</div>
-                <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 15px; font-size: 20px;">Hyper-Personalized Machine Learning</h3>
-                <p style="color: var(--text-main); margin: 0; font-size: 15px; line-height: 1.6;">
-                    Estimating a generic "average" for data consumption leads to wasted money. Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve, it guarantees mathematical precision tailored solely to your unique digital lifestyle.
-                </p>
-            </div>
-        </div>
-
-        <div class="col-md-6 mb-4">
-            <div class="glass-container h-100" style="padding: 2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--glass-border); text-align: left;">
-                <h4 style="color: var(--primary-accent); margin-top: 0; font-size: 16px;">📈 Historical Usage Data</h4>
-                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">
-                    Visualizes the historical data footprint used by our Machine Learning algorithm.
-                </p>
-                <canvas id="usageChart" style="max-height: 200px;"></canvas>
+        <div class="col-md-7">
+            <div class="glass-container p-4" style="background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+                <canvas id="usageChart" style="max-height: 300px; width: 100%;"></canvas>
             </div>
         </div>
     </div>
+
+    <!-- Feature 2: Machine Learning -->
+    <div class="row align-items-center mb-5 py-5">
+        <div class="col-md-6 order-2 order-md-1">
+            <div class="glass-container p-5 text-center d-flex align-items-center justify-content-center" style="background: linear-gradient(135deg, rgba(238, 186, 76, 0.1) 0%, rgba(255, 140, 105, 0.05) 100%); min-height: 350px; border: 1px solid var(--secondary-accent);">
+                <div style="font-size: 120px; filter: drop-shadow(0 15px 25px rgba(255, 140, 105, 0.3)); animation: float 6s ease-in-out infinite;">🧠</div>
+            </div>
+        </div>
+        <div class="col-md-6 order-1 order-md-2 ps-md-5">
+            <h3 style="color: var(--primary-accent); font-size: 32px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px;">Hyper-Personalized Machine Learning</h3>
+            <p style="color: var(--text-main); font-size: 18px; line-height: 1.7; opacity: 0.9;">
+                Estimating a generic "average" for data consumption leads to wasted money. Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve, it guarantees mathematical precision tailored solely to your unique digital lifestyle.
+            </p>
+        </div>
+    </div>
+
+
+
+
 </div>
 
 @section Scripts {
