@@ -13,6 +13,10 @@ using Hangfire.PostgreSql;
 using OptiData.Presentation.Hubs;
 using OptiData.Presentation.Services;
 
+// Fix for Render/Linux "inotify instances limit reached" error.
+// Cloud containers are immutable, so we don't need to watch appsettings.json for live changes anyway.
+Environment.SetEnvironmentVariable("DOTNET_HOSTBUILDER__RELOADCONFIGONCHANGE", "false");
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Helper to parse Render's postgres:// URL into standard ADO.NET format
