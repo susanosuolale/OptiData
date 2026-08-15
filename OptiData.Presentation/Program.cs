@@ -17,12 +17,29 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Helper to parse Render's postgres:// URL into standard ADO.NET format
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-if (!string.IsNullOrEmpty(connectionString) && connectionString.StartsWith("postgres", StringComparison.OrdinalIgnoreCase))
+
+// Fallback just in case the user set the variable as DATABASE_URL instead of ConnectionStrings__DefaultConnection
+if (string.IsNullOrEmpty(connectionString) || connectionString.Contains("localhost"))
 {
-    var uri = new Uri(connectionString);
-    var userInfo = uri.UserInfo.Split(':');
-    var port = uri.Port > 0 ? uri.Port : 5432;
-    connectionString = $"Host={uri.Host};Port={port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};Ssl Mode=Require;Trust Server Certificate=true;";
+    var renderDbUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+    if (!string.IsNullOrEmpty(renderDbUrl))
+    {
+        connectionString = renderDbUrl;
+    }
+}
+
+// Aggressively sanitize (users often accidentally paste quotes or spaces in cloud dashboards)
+if (!string.IsNullOrEmpty(connectionString))
+{
+    connectionString = connectionString.Trim(' ', '"', '\'', '\n', '\r');
+    
+    if (connectionString.StartsWith("postgres", StringComparison.OrdinalIgnoreCase))
+    {
+        var uri = new Uri(connectionString);
+        var userInfo = uri.UserInfo.Split(':');
+        var port = uri.Port > 0 ? uri.Port : 5432;
+        connectionString = $"Host={uri.Host};Port={port};Database={uri.AbsolutePath.TrimStart('/')};Username={userInfo[0]};Password={userInfo[1]};Ssl Mode=Require;Trust Server Certificate=true;";
+    }
 }
 
 // Add production SQL database connection (PostgreSQL for Render deployment)
