@@ -9,14 +9,15 @@ using OptiData.Infrastructure.Services;
 using OptiData.Application.Bundles.Commands.OptimizeBundles;
 using OptiData.Domain.Enums;
 using Hangfire;
+using Hangfire.PostgreSql;
 using OptiData.Presentation.Hubs;
 using OptiData.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add production SQL database connection
+// Add production SQL database connection (PostgreSQL for Render deployment)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Register Application and Infrastructure Services
 builder.Services.AddScoped<IBundleOptimizationService, BundleOptimizationService>();
@@ -35,11 +36,11 @@ builder.Services.AddScoped<ITelecomProviderService, AirtelTelecomProvider>();
 builder.Services.AddScoped<ITelecomProviderService, GloTelecomProvider>();
 builder.Services.AddScoped<ITelecomProviderService, NineMobileTelecomProvider>();
 
-// Configure Hangfire for Background Jobs
+// Configure Hangfire for Background Jobs using PostgreSQL
 builder.Services.AddHangfire(configuration => configuration
     .UseSimpleAssemblyNameTypeSerializer()
     .UseRecommendedSerializerSettings()
-    .UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+    .UsePostgreSqlStorage(c => c.UseNpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))));
 builder.Services.AddHangfireServer();
 
 // Add services to the container.

@@ -480,3 +480,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Ignore Local Development Settings (Contains API Keys)
+appsettings.Development.json
