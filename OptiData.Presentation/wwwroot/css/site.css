@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+:root {
+  /* Classy, Lively Feminine Light Mode (Warm Ivory, Peach, Champagne) */
+  --bg-main: #fdfbf9;       /* Extremely soft, warm ivory background */
+  --bg-card: #ffffff;       /* Pure white cards */
+  --text-main: #3d3636;     /* Deep Espresso text (softer than black) */
+  --text-muted: #8c8282;    /* Warm taupe gray */
+  --primary-accent: #ff8e72; /* Lively vibrant Peach/Coral (elegant, feminine) */
+  --secondary-accent: #eeba4c; /* Lively Sunlight/Champagne Gold */
+  --success-color: #10b981;  /* Classic Emerald Green */
+  --glass-border: rgba(0, 0, 0, 0.06); /* Clean dark line, absolutely zero glow */
+  --glass-bg: rgba(255, 255, 255, 0.95); 
+  --glass-shadow: 0 4px 20px rgba(0, 0, 0, 0.04); /* Extremely subtle, flat shadow, zero glow */
+}
+
+html, body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-main);
+  /* A very delicate, classy feminine SVG background pattern (Subtle Leaves/Floral) */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f2e8e3' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: var(--text-main);
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Navbar overrides for dark theme */
+header .navbar {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border) !important;
+}
+header .navbar-brand, header .nav-link {
+  color: var(--text-main) !important;
+  font-weight: 500;
+}
+header .nav-link:hover {
+  color: var(--primary-accent) !important;
+}
+
+/* Premium Container */
+.glass-container {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  padding: 2.5rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: 0.01em;
+}
+
+/* Premium Buttons */
+.btn-primary {
+  background: var(--primary-accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 2rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  background: #f27c59; /* Slightly darker peach on hover, no glow */
+  color: white;
+}
+
+/* Form Controls */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #eaddd7;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  color: var(--text-main);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-accent);
+  outline: none;
+  background-color: #ffffff;
+  color: var(--text-main);
+}

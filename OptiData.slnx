@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="OptiData.Application/OptiData.Application.csproj" />
+  <Project Path="OptiData.Domain/OptiData.Domain.csproj" />
+  <Project Path="OptiData.Infrastructure/OptiData.Infrastructure.csproj" />
+  <Project Path="OptiData.Presentation/OptiData.Presentation.csproj" />
+  <Project Path="OptiData.Tests/OptiData.Tests.csproj" />
+</Solution>

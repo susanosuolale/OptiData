@@ -1,0 +1,326 @@
+@{
+    ViewData["Title"] = "OptiData - Bundle Optimizer";
+}
+@model OptiData.Presentation.Models.OptimizationResultViewModel
+
+<div class="container mt-5">
+    <div class="row g-4 mb-4">
+        <!-- Main Optimization Form (Half Width) -->
+        <div class="col-md-6">
+            <div class="glass-container">
+                <h1>OptiData Magic ✨</h1>
+                <p class="subtitle" style="color: var(--text-muted); margin-bottom: 30px;">Never guess your data usage again.</p>
+                <div style="background: #fff8f5; padding: 15px; border-radius: 12px; margin-bottom: 30px; border-left: 4px solid var(--primary-accent); text-align: left;">
+                    <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 8px; font-size: 18px;">Hyper-Personalized Machine Learning</h3>
+                    <p style="color: var(--text-main); margin: 0; font-weight: 500; font-size: 14px; line-height: 1.6;">
+                        Most data apps blindly recommend bundles based on "average" consumer trends. <strong>OptiData is different.</strong> Our proprietary Machine Learning engine analyzes your unique, highly-specific historical consumption habits. It doesn't guess averages—it calculates your <em>exact</em> personalized data consumption curve for any timeframe you select. By mathematically predicting the precise Megabytes you need, OptiData ensures you never overpay for data that expires, and you never get disconnected early.
+                    </p>
+                </div>
+
+                <form id="optimizeForm">
+                    <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
+                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 8px;">How long do you need data for?</label>
+                        <div class="d-flex gap-2">
+                            <input type="number" id="durationInput" name="duration" value="1" min="1" required class="form-control w-50" />
+                            <select id="timeUnitInput" name="timeUnit" class="form-select w-50" required>
+                                <option value="Hours">Hours</option>
+                                <option value="Days" selected>Days</option>
+                                <option value="Months">Months</option>
+                                <option value="Years">Years</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
+                        <label style="display: block; color: var(--text-main); font-weight: 600; margin-bottom: 8px;">Select Telecom Provider</label>
+                        <select id="providerInput" name="provider" class="form-select" required>
+                            <option value="" disabled selected>Select Provider</option>
+                            <option value="MTN">MTN</option>
+                            <option value="Airtel">Airtel</option>
+                            <option value="GLO">GLO</option>
+                            <option value="NineMobile">9Mobile</option>
+                        </select>
+                        <div id="selectedProviderDisplay" style="margin-top: 15px; display: none; padding: 12px 18px; border-radius: 12px; background: rgba(238, 186, 76, 0.15); border: 1px solid var(--secondary-accent); font-weight: 600; color: var(--text-main); align-items: center; gap: 10px; transition: all 0.3s ease;">
+                            <span style="font-size: 20px;">📡</span> Network Selected: <strong id="providerText" style="color: var(--primary-accent); font-size: 16px;"></strong>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="optimizeBtn" class="btn-primary w-100 mt-3">Optimize My Bundle</button>
+                </form>
+
+                <div id="ajaxMessages" class="mt-3"></div>
+                <div id="ajaxResult" class="mt-4"></div>
+            </div>
+        </div>
+
+        <!-- AI Assistant Widget (Half Width) -->
+        <div class="col-md-6">
+            <div class="glass-container" style="text-align: left; position: sticky; top: 20px;">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent)); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-right: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
+                        ✨
+                    </div>
+                    <div>
+                        <h2 style="margin: 0; font-size: 22px;">AI Assistant</h2>
+                        <span style="color: var(--text-muted); font-size: 14px;">Online and ready</span>
+                    </div>
+                </div>
+                
+                <div id="assistantChat" style="background: #fff8f5; padding: 20px; border-radius: 16px; margin-bottom: 20px; border: 1px solid var(--glass-border); min-height: 200px; max-height: 400px; overflow-y: auto;">
+                    <div style="text-align: left; margin-bottom: 15px;">
+                        <span style="background: var(--primary-accent); color: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; display: inline-block; font-size: 15px;">
+                            Hi! I'm your AI Data Assistant! Ask me anything about your data usage or our bundles.
+                        </span>
+                    </div>
+                </div>
+
+                <form id="assistantForm">
+                    <div style="position: relative;">
+                        <input type="text" id="assistantInput" name="Question" class="form-control" placeholder="Ask a question..." required style="padding-right: 50px; border-radius: 20px; background-color: #ffffff; border: 1px solid #eaddd7; color: var(--text-main);" />
+                        <button type="submit" id="assistantBtn" style="position: absolute; right: 5px; top: 5px; bottom: 5px; border: none; background: transparent; color: var(--primary-accent); font-size: 20px; cursor: pointer;">
+                            ➤
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Full-width Chart Row -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="glass-container" style="padding: 1.5rem;">
+                <h4 style="color: var(--primary-accent); margin-top: 0; font-size: 16px;">📈 Historical Usage Data (Simulated)</h4>
+                <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">
+                    Visualizes simulated data generated by our background jobs, which the Machine Learning algorithm uses to predict your future data needs.
+                </p>
+                <!-- The chart canvas automatically fills its container -->
+                <canvas id="usageChart" style="max-height: 250px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", async function() {
+            // Handle AJAX Form Submission for seamless experience
+            const optimizeForm = document.getElementById('optimizeForm');
+            const optimizeBtn = document.getElementById('optimizeBtn');
+            const ajaxMessages = document.getElementById('ajaxMessages');
+            const ajaxResult = document.getElementById('ajaxResult');
+            const providerInput = document.getElementById('providerInput');
+            const selectedProviderDisplay = document.getElementById('selectedProviderDisplay');
+            const providerText = document.getElementById('providerText');
+
+            if (providerInput) {
+                providerInput.addEventListener('change', function() {
+                    providerText.innerText = this.options[this.selectedIndex].text;
+                    selectedProviderDisplay.style.display = 'flex';
+                });
+            }
+
+            if (optimizeForm) {
+                optimizeForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const duration = document.getElementById('durationInput').value;
+                    const timeUnit = document.getElementById('timeUnitInput').value;
+                    const provider = document.getElementById('providerInput').value;
+                    
+                    optimizeBtn.innerText = 'Calculating...';
+                    optimizeBtn.disabled = true;
+                    ajaxMessages.innerHTML = '';
+                    ajaxResult.innerHTML = '';
+
+                    try {
+                        const response = await fetch('/Home/OptimizeAjax', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ duration: parseInt(duration), timeUnit: timeUnit, provider: provider })
+                        });
+                        
+                        const data = await response.json();
+                        if (data.success) {
+                            let bundlesHtml = '';
+                            let totalCost = 0;
+                            let totalProvidedMB = 0;
+                            data.bundles.forEach(b => {
+                                bundlesHtml += `<li style="margin-bottom: 5px;"><strong>${b.name}</strong> - ₦${b.price}</li>`;
+                                totalCost += b.price;
+                                totalProvidedMB += b.dataAmountMB;
+                            });
+
+                            let warningHtml = '';
+                            if (data.bundles.length > 1) {
+                                warningHtml = `<div style="background: rgba(238, 186, 76, 0.2); padding: 10px; border-radius: 8px; border-left: 3px solid var(--secondary-accent); margin-bottom: 15px; font-size: 14px; color: var(--text-main);">
+                                    <strong>Note:</strong> Your predicted data needs (${Math.round(data.predictedTotalMB)} MB) surpassed the maximum single bundle available from your provider. We have automatically calculated the cheapest mathematical combination to fulfill your needs.
+                                </div>`;
+                            }
+
+                            ajaxResult.innerHTML = `
+                                <div class="result-card p-4" style="background: #fff8f5; border-radius: 16px; border-left: 5px solid var(--primary-accent); text-align: left;">
+                                    <h3 style="color: var(--primary-accent); margin-top: 0;">Optimal Prediction Result</h3>
+                                    ${warningHtml}
+                                    <p style="color: var(--text-main); margin-bottom: 10px; font-size: 15px;">
+                                        The Machine Learning model predicts you will need exactly <strong>${Math.round(data.predictedTotalMB)} MB</strong> for the selected timeframe.
+                                    </p>
+                                    <p style="color: var(--text-main); margin-bottom: 10px;">We recommend purchasing the following:</p>
+                                    <ul style="color: var(--text-main); margin-bottom: 15px;">
+                                        ${bundlesHtml}
+                                    </ul>
+                                    <p style="color: var(--text-main); margin-bottom: 20px;">
+                                        Total Combined Cost: <strong>₦${totalCost}</strong> (Yields ${totalProvidedMB} MB)
+                                    </p>
+                                    <button id="scheduleBtn" class="btn btn-success w-100" style="background: #10b981; border: none; border-radius: 8px; font-weight: 600; padding: 12px;">
+                                        ✨ Enable Auto-Purchase
+                                    </button>
+                                </div>
+                            `;
+
+                            document.getElementById('scheduleBtn').addEventListener('click', async function() {
+                                this.innerText = 'Scheduling...';
+                                this.disabled = true;
+                                const schedRes = await fetch('/Home/SchedulePurchaseAjax', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ predictedMB: totalProvidedMB, provider: data.provider, duration: data.duration, timeUnit: data.timeUnit })
+                                });
+                                const schedData = await schedRes.json();
+                                if (schedData.success) {
+                                    ajaxMessages.innerHTML = `<div class="alert alert-success" style="border-radius: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981;">${schedData.message}</div>`;
+                                }
+                                this.innerText = 'Auto-Purchase Enabled';
+                            });
+                        } else {
+                            ajaxResult.innerHTML = `
+                                <div class="result-card p-4" style="background: #fff8f5; border-radius: 16px; border-left: 5px solid var(--primary-accent); text-align: left;">
+                                    <h3 style="color: var(--primary-accent); margin-top: 0;">Wait!</h3>
+                                    <p style="color: var(--text-main); margin-bottom: 0;">${data.error}</p>
+                                </div>
+                            `;
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    } finally {
+                        optimizeBtn.innerText = 'Optimize My Bundle';
+                        optimizeBtn.disabled = false;
+                    }
+                });
+            }
+
+            // Handle Assistant Chat Submission via AJAX
+            const assistantForm = document.getElementById('assistantForm');
+            const assistantInput = document.getElementById('assistantInput');
+            const assistantBtn = document.getElementById('assistantBtn');
+            const assistantChat = document.getElementById('assistantChat');
+
+            if (assistantForm) {
+                assistantForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const question = assistantInput.value;
+                    if (!question) return;
+
+                    assistantBtn.disabled = true;
+                    assistantInput.disabled = true;
+
+                    assistantChat.innerHTML += `
+                        <div style="margin-bottom: 15px; text-align: right;">
+                            <span style="background: #ffffff; border: 1px solid #eaddd7; color: var(--text-main); padding: 8px 15px; border-radius: 15px 15px 0 15px; display: inline-block; font-size: 14px;">
+                                ${question}
+                            </span>
+                        </div>
+                        <div id="loadingBubble" style="text-align: left; margin-bottom: 15px;">
+                            <span style="background: var(--primary-accent); color: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; display: inline-block; font-size: 15px; opacity: 0.7;">
+                                Thinking...
+                            </span>
+                        </div>
+                    `;
+                    assistantChat.scrollTop = assistantChat.scrollHeight;
+                    
+                    try {
+                        const response = await fetch('/Assistant/AskAjax', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ question: question })
+                        });
+                        
+                        const data = await response.json();
+                        const loader = document.getElementById('loadingBubble');
+                        if (loader) loader.remove();
+
+                        if (data.success) {
+                            assistantChat.innerHTML += `
+                                <div style="text-align: left; margin-bottom: 15px;">
+                                    <span style="background: var(--primary-accent); color: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; display: inline-block; font-size: 15px; line-height: 1.5;">
+                                        ${data.answer}
+                                    </span>
+                                </div>
+                            `;
+                        } else {
+                            assistantChat.innerHTML += `
+                                <div style="text-align: left; margin-bottom: 15px;">
+                                    <span style="background: rgba(220, 38, 38, 0.8); color: white; padding: 12px 18px; border-radius: 15px 15px 15px 0; display: inline-block; font-size: 15px;">
+                                        ${data.error}
+                                    </span>
+                                </div>
+                            `;
+                        }
+                    } catch (err) {
+                        console.error(err);
+                    } finally {
+                        assistantBtn.disabled = false;
+                        assistantInput.disabled = false;
+                        assistantInput.value = '';
+                        assistantChat.scrollTop = assistantChat.scrollHeight;
+                    }
+                });
+            }
+
+            try {
+                const response = await fetch('/Home/GetUsageData');
+                const data = await response.json();
+                
+                const labels = data.map(d => d.date);
+                const values = data.map(d => d.mb);
+
+                const ctx = document.getElementById('usageChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Data Consumed (MB)',
+                            data: values,
+                            borderColor: '#ff8c69', /* Lively Peach */
+                            backgroundColor: 'rgba(255, 140, 105, 0.15)', /* Transparent Peach */
+                            borderWidth: 2,
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#eeba4c' /* Champagne Gold */
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#94a3b8' }
+                            },
+                            x: {
+                                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                                ticks: { color: '#94a3b8' }
+                            }
+                        }
+                    }
+                });
+            } catch (err) {
+                console.error("Failed to load chart data:", err);
+            }
+        });
+    </script>
+}
