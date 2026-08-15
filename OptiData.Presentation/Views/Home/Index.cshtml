@@ -4,6 +4,21 @@
 @model OptiData.Presentation.Models.OptimizationResultViewModel
 
 <div class="container mt-5">
+    <!-- Top Level Feature Callout -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div style="background: linear-gradient(135deg, rgba(238, 186, 76, 0.15) 0%, rgba(255, 140, 105, 0.1) 100%); padding: 20px; border-radius: 12px; border-left: 5px solid var(--secondary-accent); display: flex; align-items: center; gap: 20px;">
+                <div style="font-size: 32px;">🧠</div>
+                <div style="text-align: left;">
+                    <h4 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 5px; font-size: 18px;">Hyper-Personalized Machine Learning</h4>
+                    <p style="color: var(--text-main); margin: 0; font-size: 15px; line-height: 1.5;">
+                        Most applications blindly recommend plans based on "average" consumer trends. <strong>OptiData is fundamentally different.</strong> Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve instead of guessing averages, it guarantees mathematical precision tailored solely to you.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row g-4 mb-4">
         <!-- Main Optimization Form (Half Width) -->
         <div class="col-md-6">
@@ -17,12 +32,6 @@
                     </p>
                 </div>
 
-                <div style="background: linear-gradient(135deg, rgba(255, 140, 105, 0.1) 0%, rgba(238, 186, 76, 0.15) 100%); padding: 15px; border-radius: 12px; margin-bottom: 30px; border: 1px solid var(--secondary-accent); text-align: left;">
-                    <h3 style="color: var(--primary-accent); margin-top: 0; margin-bottom: 8px; font-size: 16px;">Hyper-Personalized Machine Learning</h3>
-                    <p style="color: var(--text-main); margin: 0; font-weight: 500; font-size: 14px; line-height: 1.5;">
-                        Most applications blindly recommend plans based on "average" consumer trends. <strong>OptiData is fundamentally different.</strong> Our proprietary Machine Learning engine trains exclusively on your highly-specific historical consumption footprint. By calculating your <em>exact</em> personalized data curve instead of guessing averages, it guarantees mathematical precision tailored solely to you.
-                    </p>
-                </div>
 
                 <form id="optimizeForm">
                     <div class="input-group" style="margin-bottom: 20px; text-align: left; display: block;">
